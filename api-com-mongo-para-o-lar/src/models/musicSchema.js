@@ -6,28 +6,30 @@ const musicModel = new mongoose.Schema({
         type: String,
         require: true
     },
-    album: {
-        type: String
-    },
-    year: {
-        type: Number
-    },
-    createdIn: {
-        type: Date,
-        default: new Date()
-    },
-    title: {
-        type: String,
-        require: true
-    },
-    composer: {
-        type: String
-    },
     like: {
         type: Boolean
     },
     deslike: {
         type: Boolean
+    },
+    createdIn: {
+        type: Date,
+        default: new Date() 
+    },
+    discography: {
+        title: {
+            type: String,
+            require: true
+        },
+        music: {
+            music: new Array
+        },
+        createdIn: 
+        {
+            type: Date,
+            default: new Date(),
+            require: true
+        }
     }
 })
 
