@@ -10,8 +10,8 @@ const connect = async () => {
             useUnifiedTopology: true
         })
         console.log("Banco conectado!");
-    } catch (error) {
-        console.log(error, message);
+    } catch (e) {
+        console.log(e, message);
     }
 }
 

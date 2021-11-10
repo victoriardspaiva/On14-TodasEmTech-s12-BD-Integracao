@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 
-const MusicSchema = new mongoose.Schema({
+const musicModel = new mongoose.Schema({
     id: mongoose.Schema.Types.ObjectId,
     singer: {
         type: String,
@@ -12,8 +12,7 @@ const MusicSchema = new mongoose.Schema({
     year: {
         type: Number
     },
-    createdIn:
-    {
+    createdIn: {
         type: Date,
         default: new Date()
     },
@@ -21,5 +20,15 @@ const MusicSchema = new mongoose.Schema({
         type: String,
         require: true
     },
-    
+    composer: {
+        type: String
+    },
+    like: {
+        type: Boolean
+    },
+    deslike: {
+        type: Boolean
+    }
 })
+
+module.exports = mongoose.model("music", musicModel)
