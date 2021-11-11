@@ -16,8 +16,7 @@ const musicModel = new mongoose.Schema({
         type: Date,
         default: new Date()
     },
-    discography:
-    {
+    discography: [{
         title: {
             type: String,
             require: true
@@ -26,7 +25,7 @@ const musicModel = new mongoose.Schema({
             type: Date
         },
         musics: [String]
-    }
+    }]
 
 })
 

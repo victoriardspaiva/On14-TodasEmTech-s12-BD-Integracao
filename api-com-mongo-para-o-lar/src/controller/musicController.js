@@ -34,14 +34,8 @@ const createSinger = async (req, res) => {
             title: req.body.discography.title,
             _id: new mongoose.Types.ObjectId()
         })
-        // let discographySaved = {
-        //     title: req.body.title,
-        //     createdIn: req.body.createdIn,
-        //     music: req.body.music
-        // }
 
-
-        let singerSaved = await singer.save()//, { $push: { discografia: title } }
+        let singerSaved = await singer.save()
         res.status(201).json({
             "Cantor/Cantora": singerSaved
         })

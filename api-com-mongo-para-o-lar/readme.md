@@ -10,7 +10,7 @@ O entregável obrigatório consiste em um getAll, getById e um Post. Caso queira
 ### Sugestão de Rotas
 [GET]  "artistas/all"   - retorna todos os autores de <br> ok
 [GET] "artistas/{id}" - retorna um unico autor por id <br> ok
-[POST] "artistas/create" - cria um novo autor <br>
+[POST] "artistas/create" - cria um novo autor <br> ok
 
 
 ### Sugestão de Schema
@@ -25,3 +25,6 @@ O entregável obrigatório consiste em um getAll, getById e um Post. Caso queira
     }
 ```
 
+### Anotações
+
+[] rotas para add discografia
