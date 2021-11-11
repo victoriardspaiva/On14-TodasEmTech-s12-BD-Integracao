@@ -8,7 +8,7 @@ const app = express()
 
 app.use(cors())
 app.use(express.json())
-app.use("/music", musicRouter)
+app.use("/singer", musicRouter)
 
 db.connect()
 

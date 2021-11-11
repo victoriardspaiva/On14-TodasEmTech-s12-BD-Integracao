@@ -7,30 +7,28 @@ const musicModel = new mongoose.Schema({
         require: true
     },
     like: {
-        type: Boolean
+        type: Number
     },
     deslike: {
-        type: Boolean
+        type: Number
     },
     createdIn: {
         type: Date,
-        default: new Date() 
+        default: new Date()
     },
-    discography: {
+    discography:
+    {
         title: {
             type: String,
             require: true
         },
-        music: {
-            music: new Array
+        createIn: {
+            type: Date
         },
-        createdIn: 
-        {
-            type: Date,
-            default: new Date(),
-            require: true
-        }
+        musics: [String]
     }
+
 })
 
 module.exports = mongoose.model("music", musicModel)
+
