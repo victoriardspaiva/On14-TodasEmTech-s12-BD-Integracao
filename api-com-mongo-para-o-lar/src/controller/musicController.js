@@ -61,9 +61,24 @@ const upSinger = async (req, res) => {
     }
 }
 
+const deleteSinger = async (req, res) => {
+    try{
+        let idSinger = req.query.id
+        const deleteSinger = await SingerSchema.findByIdAndDelete({ _id: idSinger })
+        res.status(200).json({
+            messagem: "Artista deletado com sucesso.", deleteSinger
+        })
+    }catch (e){
+        res.status(500).json({
+            messagem: e.message
+        })
+    }
+}
+
 module.exports = {
     getAll,
     singerById,
     createSinger,
-    upSinger
+    upSinger,
+    deleteSinger
 }

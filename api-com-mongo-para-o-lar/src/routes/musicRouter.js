@@ -6,5 +6,6 @@ router.get("/all", controller.getAll)
 router.get("/byid?", controller.singerById)
 router.post("/create", controller.createSinger)
 router.patch("/update?", controller.upSinger)
+router.delete("/delete?", controller.deleteSinger)
 
 module.exports = router
