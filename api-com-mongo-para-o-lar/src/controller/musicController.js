@@ -1,9 +1,9 @@
-const MusicSchema = require("../models/musicSchema")
+const SingerSchema = require("../models/musicSchema")
 const mongoose = require("mongoose")
 
 const getAll = async (req, res) => {
     try {
-        const music = await MusicSchema.find()
+        const music = await SingerSchema.find()
         res.status(200).json(music)
     } catch (e) {
         res.status(500).json({
@@ -14,7 +14,7 @@ const getAll = async (req, res) => {
 
 const singerById = async (req, res) => {
     try {
-        const singerFound = await MusicSchema.findById(req.query.id)
+        const singerFound = await SingerSchema.findById(req.query.id)
         res.status(200).json(singerFound)
     } catch (e) {
         res.status(500).json({
@@ -25,13 +25,12 @@ const singerById = async (req, res) => {
 
 const createSinger = async (req, res) => {
     try {
-        const singer = new MusicSchema({
+        const singer = new SingerSchema({
             singer: req.body.singer,
             like: req.body.like,
             deslike: req.body.deslike,
             createdIn: req.body.createdIn,
             discography: req.body.discography,
-            title: req.body.discography.title,
             _id: new mongoose.Types.ObjectId()
         })
 
@@ -47,8 +46,24 @@ const createSinger = async (req, res) => {
     }
 }
 
+const upSinger = async (req, res) => {
+    try {
+        let idSinger = req.query.id
+        let upSinger = req.body.singer
+        const findAndUp = await SingerSchema.findByIdAndUpdate({ _id: idSinger }, { singer: upSinger }, { new: true })
+        res.status(200).json({
+            message: "Artista atualizado com sucesso.", findAndUp
+        })
+    } catch (e) {
+        res.status(500).json({
+            mensagem: e.message
+        })
+    }
+}
+
 module.exports = {
     getAll,
     singerById,
-    createSinger
+    createSinger,
+    upSinger
 }

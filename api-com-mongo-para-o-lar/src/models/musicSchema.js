@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 
-const musicModel = new mongoose.Schema({
+const singerSchema = new mongoose.Schema({
     id: mongoose.Schema.Types.ObjectId,
     singer: {
         type: String,
@@ -29,5 +29,5 @@ const musicModel = new mongoose.Schema({
 
 })
 
-module.exports = mongoose.model("music", musicModel)
+module.exports = mongoose.model("singer", singerSchema)
 
