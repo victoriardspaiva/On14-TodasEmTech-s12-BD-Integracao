@@ -28,6 +28,6 @@ O entregável obrigatório consiste em um getAll, getById e um Post. Caso queira
 ### Anotações
 
 [] rotas para add discografia
-[] alterar um artista
-[] deletar um artista
-[] like e deslike
+[x] alterar um artista
+[x] deletar um artista
+[x] like e deslike

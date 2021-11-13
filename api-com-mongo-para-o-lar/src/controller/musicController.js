@@ -52,7 +52,7 @@ const upSinger = async (req, res) => {
         let upSinger = req.body.singer
         const findAndUp = await SingerSchema.findByIdAndUpdate({ _id: idSinger }, { singer: upSinger }, { new: true })
         res.status(200).json({
-            message: "Artista atualizado com sucesso.", findAndUp
+            message: "Artista atualizado com sucesso.", "Novo/a artista": findAndUp
         })
     } catch (e) {
         res.status(500).json({
@@ -62,13 +62,51 @@ const upSinger = async (req, res) => {
 }
 
 const deleteSinger = async (req, res) => {
-    try{
+    try {
         let idSinger = req.query.id
         const deleteSinger = await SingerSchema.findByIdAndDelete({ _id: idSinger })
         res.status(200).json({
             messagem: "Artista deletado com sucesso.", deleteSinger
         })
-    }catch (e){
+    } catch (e) {
+        res.status(500).json({
+            messagem: e.message
+        })
+    }
+}
+
+const likeAndDeslike = async (req, res) => {
+    try {
+        let { like, deslike } = req.query
+        const found = await SingerSchema.findById(req.query.id)
+        if (found == undefined) {
+            res.status(404).send({ message: "Artista não encontrado!" })
+        }
+        like == 1 ? found.like += 1 : ''
+        deslike == 1 ? found.deslike -= 1 : ''
+        found.save()
+        like && deslike == 1 ? res.status(400).send({ message: "Não é possivel marcar like e deslike simultaneamente. Escolhar a opção deseja e tente novamente." }) : ''
+        res.status(200).send(found)
+    } catch (e) {
+        res.status(500).json({
+            messagem: e.message
+        })
+    }
+}
+
+const addDiscography = async (req, res) => {
+    try {
+        const findSinger = await SingerSchema.findById(req.query.id)
+
+        if (findSinger) {
+            findSinger.discography = { $push: { discography: req.body.discography } }
+        }
+        const savedAlbum = await findSinger.save()
+
+        res.status(200).json({
+        message: "Album adicionado com sucesso.", savedAlbum
+        })
+    } catch (e) {
         res.status(500).json({
             messagem: e.message
         })
@@ -80,5 +118,7 @@ module.exports = {
     singerById,
     createSinger,
     upSinger,
-    deleteSinger
+    deleteSinger,
+    likeAndDeslike,
+    addDiscography
 }
