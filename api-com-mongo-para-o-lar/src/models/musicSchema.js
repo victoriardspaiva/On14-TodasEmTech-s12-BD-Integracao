@@ -21,7 +21,7 @@ const singerSchema = new mongoose.Schema({
             type: String,
             require: true
         },
-        createIn: {
+        createdIn: {
             type: Date
         },
         musics: [String]

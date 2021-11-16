@@ -97,15 +97,39 @@ const likeAndDeslike = async (req, res) => {
 const addDiscography = async (req, res) => {
     try {
         const findSinger = await SingerSchema.findById(req.query.id)
-
+        const bodyReq = await req.body.discography
         if (findSinger) {
-            findSinger.discography = { $push: { discography: req.body.discography } }
-        }
-        const savedAlbum = await findSinger.save()
+            console.log("body antes de inserido", bodyReq);
+            // SingerSchema.findByIdAndUpdate(findSinger, { $push: { discography: bodyReq}})
+            SingerSchema.where({ _id: findSinger }).update({ $set: { discography: bodyReq } })
+            console.log("body inserido", findSinger.discography);
+            const savedAlbum = await findSinger.save()
+            console.log("dps de salvo", savedAlbum);
 
-        res.status(200).json({
-        message: "Album adicionado com sucesso.", savedAlbum
-        })
+            res.status(200).json({
+                message: "Album adicionado com sucesso.", savedAlbum
+            })
+            /*meu console retorna assim: 
+            body antes de inserido [
+                {
+                  title: 'hsdahdasdhaldk',
+                  musics: [ '11111111', '22222', '33333333333' ],
+                  createdIn: 2019
+                }
+              ]
+              body inserido [ { musics: [], _id: new ObjectId("619302341c95a616ff0c71ee") } ]
+              dps de salvo {
+                _id: new ObjectId("6192f7ca627c0c1dfd25d6f3"),
+                singer: 'Teste Falção',
+                like: 2,
+                deslike: 0,
+                createdIn: 2021-11-16T00:12:43.571Z,
+                discography: [ { musics: [], _id: new ObjectId("619302341c95a616ff0c71ee") } ],
+                __v: 2
+              }
+              
+              */
+        }
     } catch (e) {
         res.status(500).json({
             messagem: e.message
