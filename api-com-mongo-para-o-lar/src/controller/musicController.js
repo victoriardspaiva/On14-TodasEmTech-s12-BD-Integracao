@@ -99,8 +99,8 @@ const addDiscography = async (req, res) => {
         const findSinger = await req.query.id
         const bodyReq = await req.body.discography
         if (findSinger) {
-            const albumSaved = await SingerSchema.findByIdAndUpdate(findSinger, {$push: {discography: bodyReq}})
-            await albumSaved.save()
+            let albumSaved = await SingerSchema.findByIdAndUpdate(findSinger, {$push: {discography: bodyReq}})
+            albumSaved = await albumSaved.save()
 
             res.status(200).json({
                 message: "Album adicionado com sucesso.", albumSaved
